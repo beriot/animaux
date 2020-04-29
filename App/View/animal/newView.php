@@ -1,5 +1,5 @@
 <div class="container mt-5">
-    <form action="../../../public/index.php?page=save" method="POST">
+    <form action="index.php?page=newAnimal" method="POST">
         <div class="form-group">
             <label for="nom">Nom</label>
             <input type="text" class="form-control" id="nom" name="nom">

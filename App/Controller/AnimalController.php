@@ -31,7 +31,7 @@ class AnimalController extends Controller{
             $options = $_POST["options"];
 
             $this->dbInterface->save($animal, 'animal');
-            $animalId = $this->AnimalModel->findOneBy(["title" => $animal["title"]]);
+            $animalId = $this->AnimalModel->findOneBy(["nom" => $animal["nom"]]);
             $animalId = $animalId->id;
 
             foreach ($options as $option) {

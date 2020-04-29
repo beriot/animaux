@@ -18,8 +18,12 @@ class UserController extends Controller{
     public function signup(){
         $message = "";
         try {
-            if(!empty($_POST) && !empty($_POST["username"])){
+            if(!empty($_POST) && !empty($_POST["username"]) && !empty($_POST["nom"]) && !empty($_POST["prenom"])
+                && !empty($_POST["adresse"]) && !empty($_POST["postal"]) && !empty($_POST["mail"])
+                && !empty($_POST["telephone"]) && !empty($_POST["role"])){
                 $_POST["password"] = $this->encoder->passwordEncode($_POST["password"]);
+
+
                 $this->interface->save($_POST, 'user');
                 return $this->redirectToRoute('home');
             }else {
