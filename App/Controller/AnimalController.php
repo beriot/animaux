@@ -7,7 +7,8 @@ use Core\Model\DbInterface;
 use App\Model\AnimalModel;
 use Core\Controller\Controller;
 
-class AnimalController extends Controller{
+class AnimalController extends Controller
+{
 
     public function __construct()
     {
@@ -17,16 +18,18 @@ class AnimalController extends Controller{
 
     }
 
-    public function home(){
+    public function homeAnimal()
+    {
         $animals = $this->AnimalModel->findAll();
         return $this->render("animal/indexView", [
             'animals' => $animals,
         ]);
     }
 
-    public function newAnimal(){
+    public function newAnimal()
+    {
 
-        if(!empty($_POST)){
+        if (!empty($_POST)) {
             $animal = array_splice($_POST, 0, 6);
             $options = $_POST["options"];
 
@@ -37,11 +40,11 @@ class AnimalController extends Controller{
             foreach ($options as $option) {
                 $this->dbInterface->save(["option_id" => $option, "animal_id" => $animalId], 'optionsAnimal');
             }
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('homeAnimal');
 
         }
 
-        return $this->render("animal/newView" );
+        return $this->render("animal/newView");
     }
 
 
@@ -63,6 +66,13 @@ class AnimalController extends Controller{
 
     public function delete()
     {
-        return $this->redirectToRoute('home');
+
+        return $this->redirectToRoute('homeAnimal');
+    }
+
+    public function reservation (){
+
+        $animal = $this->AnimalModel->find($_GET["id"]);
+        return $this->render("reservation/reservationView", ['animal' => $animal]);
     }
 }
